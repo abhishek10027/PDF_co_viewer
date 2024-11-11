@@ -1,11 +1,9 @@
 # PDF_co_viewer
 
-Here's a `README.md` file tailored for your project:
-
-```markdown
-# PDF Co-Viewer
 
 A real-time synchronized PDF viewer built with Flask, Socket.IO, and PDF.js. This application allows a presenter or teacher to control the pages of a PDF file remotely, while all connected viewers see the same page in real-time.
+
+
 
 ## Features
 
@@ -19,21 +17,7 @@ This co-viewer is ideal for remote presentations, online classrooms, or any scen
 
 ## Project Structure
 
-```plaintext
-pdf-co-viewer/
-├── app.py                      # Main Flask app and Socket.IO setup
-├── requirements.txt            # Python dependencies
-├── static/
-│   ├── js/
-│   │   └── main.js             # Client-side JavaScript for Socket.IO and PDF.js integration
-│   ├── pdf/
-│   │   └── sample.pdf          # Sample PDF file to be viewed
-│   └── css/
-│       └── styles.css          # Custom styles for the viewer
-├── templates/
-│   └── index.html              # HTML template for the main viewer page
-└── README.md                   # Instructions and documentation
-```
+
 
 ## Getting Started
 
