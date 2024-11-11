@@ -39,7 +39,7 @@ pdf-co-viewer/
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/pdf-co-viewer.git
+   git clone https://github.com/abhishek10027/PDF_co_viewer/tree/main.git
    cd pdf-co-viewer
    ```
 
