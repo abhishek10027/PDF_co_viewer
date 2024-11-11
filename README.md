@@ -70,13 +70,4 @@ This co-viewer is ideal for remote presentations, online classrooms, or any scen
 - **PDF.js**: For rendering PDF files within the browser.
 - **HTML/CSS/JavaScript**: For the frontend.
 
-## Project Structure Overview
-
-- **`app.py`**: Sets up the server, defines routes, and handles real-time page synchronization.
-- **`static/`**: Contains JavaScript, CSS, and PDF files for frontend functionality.
-  - `js/main.js`: Handles PDF loading, rendering, and page synchronization.
-  - `pdf/sample.pdf`: A sample PDF for testing.
-  - `css/styles.css`: Styles for the viewer.
-- **`templates/`**: Contains HTML templates.
-  - `index.html`: The main page for the PDF co-viewer interface.
 
