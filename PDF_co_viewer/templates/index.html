@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PDF Co-Viewer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+    <style>
+        body { display: flex; flex-direction: column; align-items: center; font-family: Arial, sans-serif; }
+        #pdf-viewer { width: 80vw; height: 90vh; border: 1px solid #ccc; margin-top: 20px; }
+        #controls { margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h1>PDF Co-Viewer</h1>
+    <canvas id="pdf-viewer"></canvas>
+    <div id="controls">
+        <button onclick="prevPage()">Previous</button>
+        <span>Page: <span id="page-num">1</span> / <span id="page-count">1</span></span>
+        <button onclick="nextPage()">Next</button>
+    </div>
+
+    <script>
+        const socket = io.connect();
+        let pdfDoc = null, pageNum = 1, pageRendering = false;
+
+        async function loadPDF(url) {
+            pdfDoc = await pdfjsLib.getDocument(url).promise;
+            document.getElementById('page-count').textContent = pdfDoc.numPages;
+            renderPage(pageNum);
+        }
+
+        function renderPage(num) {
+            pageRendering = true;
+            pdfDoc.getPage(num).then(page => {
+                const viewport = page.getViewport({ scale: 1.5 });
+                const canvas = document.getElementById('pdf-viewer');
+                const context = canvas.getContext('2d');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                const renderContext = { canvasContext: context, viewport: viewport };
+                page.render(renderContext).promise.then(() => {
+                    pageRendering = false;
+                });
+                document.getElementById('page-num').textContent = num;
+            });
+        }
+
+        function prevPage() {
+            if (pageNum > 1) {
+                pageNum--;
+                socket.emit('change_page', { page: pageNum });
+                renderPage(pageNum);
+            }
+        }
+
+        function nextPage() {
+            if (pageNum < pdfDoc.numPages) {
+                pageNum++;
+                socket.emit('change_page', { page: pageNum });
+                renderPage(pageNum);
+            }
+        }
+
+        socket.on('page_update', (data) => {
+            if (pageNum !== data.page) {
+                pageNum = data.page;
+                renderPage(pageNum);
+            }
+        });
+
+        socket.emit('join');
+        loadPDF('/pdf/sample.pdf');
+    </script>
+</body>
+</html>
