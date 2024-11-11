@@ -16,6 +16,7 @@ A real-time synchronized PDF viewer built with Flask, Socket.IO, and PDF.js. Thi
 This co-viewer is ideal for remote presentations, online classrooms, or any scenario where a group needs to follow along with a PDF document in sync with a presenter.
 
 ## Project Structure
+```plaintext
 pdf-co-viewer/
 ├── app.py                      # Main Flask app and Socket.IO setup
 ├── requirements.txt            # Python dependencies
@@ -24,7 +25,7 @@ pdf-co-viewer/
                                 # PDF rendering, and custom CSS styles for the viewer interface.
 └── README.md                   # Instructions and documentation
 
-
+```
 
 ## Getting Started
 
